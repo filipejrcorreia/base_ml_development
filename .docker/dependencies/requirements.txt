@@ -3,3 +3,4 @@ tensorflow-gpu
 keras
 jupyter
 jupyterlab
+ipython==7.32.0
