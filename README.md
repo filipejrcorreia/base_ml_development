@@ -29,4 +29,4 @@ Do not forget to run the following command:
 ```bash
 openssl req -x509 -nodes -newkey rsa:2048 -keyout jupyter.pem -out jupyter.pem
 ```
-in order to create a SSL certificate. 
+in order to create a SSL certificate, and to replace the preexisting jupyter.pem
