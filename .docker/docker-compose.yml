@@ -1,18 +1,22 @@
-version:  '3'
+version: '3'
 services:
-  datascience-notebook:
-      build: .
-      image:    jupyter/datascience-notebook
-      volumes:
-        - ${LOCAL_WORKING_DIR}:/home/jovyan/work
-        - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
-        - ${LOCAL_MODULES}:/home/jovyan/work/modules
-        - ${LOCAL_SSL_CERTS}:/etc/ssl/notebook
-        - .:/code
-      ports:
-        - ${PORT}:8888
-      container_name:   jupyter_notebook
-      command: "start-notebook.sh \
+  jupyter:
+    build: .
+    volumes:
+     - ${LOCAL_WORKING_DIR}:/data/jupyter
+     - ${LOCAL_DATASETS}:/data/jupyter/datasets
+     - ${LOCAL_MODULES}:/git/python_modules
+     - ${LOCAL_SSL_CERTS}:/opt/ssl-certs/jupyter
+    ports:
+     - "${PORT}:8888"
+    container_name: keras_jupyter
+    command: "start-notebook.sh \
         --NotebookApp.password=${ACCESS_TOKEN} \
-        --NotebookApp.certfile=/etc/ssl/notebook/jupyter.pem
-        --gpus all -gpu -benchmark"
+        --NotebookApp.certfile=/etc/ssl/notebook/jupyter.pem"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
