@@ -1,7 +1,8 @@
 #FROM python:3.6
-FROM nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu20.04
+#FROM nvidia/cuda:12.0.0-runtime-ubuntu22.04
+FROM tensorflow/tensorflow:latest-gpu
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.6 \
+    python3.9 \
     python3-pip \
     && \
 apt-get clean && \
