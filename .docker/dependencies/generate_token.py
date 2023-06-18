@@ -2,6 +2,6 @@ import sys
 import sys
 import IPython as IPython
 
-secret=sys.argv[0]
+secret=str(sys.argv[1])
 hash = IPython.lib.passwd(secret)
 print(hash)
